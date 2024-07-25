@@ -14,10 +14,10 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user = current_user
     @order.total_price = calculate_total_price
-
+    debugger
     if @order.save
       # Clear the cart after successful order creation
-      session[:cart] = {}
+      session[:cart] = []
       redirect_to @order, notice: 'Order was successfully created.'
     else
       render :new
@@ -38,6 +38,10 @@ class OrdersController < ApplicationController
     end
   end
 
+  def order_params
+    params.require(:order).permit(:address, :province, :payment_method, :total_price)
+  end
+
   # Calculate the total price of the items in the cart
   def calculate_total_price
     cart_items = session[:cart].map do |product_id, quantity|
@@ -47,8 +51,4 @@ class OrdersController < ApplicationController
     cart_items.sum
   end
 
-  # Strong parameters for order
-  def order_params
-    params.require(:order).permit(:address, :province)
-  end
 end
