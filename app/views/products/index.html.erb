@@ -55,8 +55,9 @@
           </div>
           <div class="card-footer">
             <%= link_to 'Show', product_path(product), class: "btn btn-primary" %>
-            <%= link_to 'Edit', edit_product_path(product), class: "btn btn-secondary" %>
-            <%= link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            <%= link_to 'Add to Cart', add_to_cart_cart_path(product), method: :post, class: "btn btn-secondary" %>
+            <%#= link_to 'Edit', edit_product_path(product), class: "btn btn-secondary" %>
+            <%#= link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
           </div>
         </div>
       </div>
