@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resource :checkout, only: [:new, :create] do
     get 'success'
   end
+  resources :orders, only: [:new, :create, :show, :index]
 end

@@ -1,0 +1,13 @@
+<!-- app/views/orders/show.html.erb -->
+<div class="container mt-5">
+  <h1>Order Confirmation</h1>
+
+  <p><strong>Order Number:</strong> <%= @order.id %></p>
+  <p><strong>Address:</strong> <%= @order.address %></p>
+  <p><strong>Province:</strong> <%= @order.province %></p>
+  <p><strong>Total Price:</strong> <%= number_to_currency(@order.total_price) %></p>
+
+  <div class="mt-4">
+    <%= link_to 'Back to Products', products_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
