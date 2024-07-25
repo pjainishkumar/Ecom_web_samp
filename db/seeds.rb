@@ -5,18 +5,33 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-# User.find_or_create_by(email: 'admin@example.com', password: 'password', password_confirmation: 'password',admin: true) if Rails.env.development?
+User.find_or_create_by(email: 'normal@example.com',admin: true) if Rails.env.development?
+# AdminUser.find_or_create_by(email: 'admin@example.com',admin: true) 
+AdminUser.create!(email: "admin@email.com",password: 'password')
 
-# db/seeds.rb
-categories = ["Electronics", "Books", "Clothing", "Home Appliances"]
+
+categories = ['Electronics', 'Furniture', 'Clothing', "Home Appliances"]
+
 
 30.times do
+  # Generate a fake image URL
+  image_url = Faker::LoremFlickr.image(size: "300x300", search_terms: ['product'])
+
+  # Open the image URL
+  image_file = URI.open(image_url)
+
+  # Create the product with an attached image
   Product.create(
     name: Faker::Commerce.product_name,
     description: Faker::Lorem.paragraph,
     price: Faker::Commerce.price(range: 10.0..1000.0),
     category: categories.sample,
     on_sale: [true, false].sample,
-    new: [true, false].sample
+    new: [true, false].sample,
+    image: {
+      io: image_file,
+      filename: 'product_image.jpg',
+      content_type: 'image/jpeg'
+    }
   )
 end
