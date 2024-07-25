@@ -1,24 +1,27 @@
-<div class="container mt-5">
-  <div class="card" style="width: 24rem; margin: 0 auto;">
-    <div class="card-img-top" style="height: 300px; object-fit: cover; background-color: #f8f9fa;">
+<!-- app/views/products/show.html.erb -->
+<div class="container mt-5" style="max-width: 100%; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
+  <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+    <!-- Product Image -->
+    <div style="width: 100%; max-width: 600px; height: 400px; display: flex; align-items: center; justify-content: center; background-color: #ffffff; margin-bottom: 20px;">
       <% if @product.image.attached? %>
         <%= image_tag @product.image, style: "width: 100%; height: 100%; object-fit: cover;" %>
       <% else %>
-        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #e9ecef; color: #6c757d;">
           <span>No Image</span>
         </div>
       <% end %>
     </div>
-    <div class="card-body">
-      <h1 class="card-title"><%= @product.name %></h1>
-      <p class="card-text"><strong>Description:</strong> <%= @product.description %></p>
-      <p class="card-text"><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
-      
-      <%= form_with url: add_to_cart_cart_path(@product), method: :post, local: true do %>
-        <%= submit_tag 'Add to Cart', class: "btn btn-secondary" %>
-      <% end %>
-      
-      <%= link_to 'Back', products_path, class: "btn btn-secondary" %>
+
+    <!-- Product Details -->
+    <div style="width: 100%; max-width: 600px; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+      <h1 style="margin-bottom: 20px; font-size: 2rem; color: #333333;"><%= @product.name %></h1>
+      <p style="margin-bottom: 10px; font-size: 1.2rem; color: #333333;"><strong>Description:</strong> <%= @product.description %></p>
+      <p style="margin-bottom: 20px; font-size: 1.2rem; color: #333333;"><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
+
+      <div style="display: flex; justify-content: center; gap: 10px;">
+        <%= link_to 'Add to Cart', add_to_cart_cart_path(@product), class: 'btn btn-success', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #28a745; border: none;" %>
+        <%= link_to 'Back', products_path, class: 'btn btn-secondary', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #6c757d; border: none;" %>
+      </div>
     </div>
   </div>
 </div>

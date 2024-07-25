@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.user = current_user
     @order.total_price = calculate_total_price
-    debugger
     if @order.save
       # Clear the cart after successful order creation
       session[:cart] = []

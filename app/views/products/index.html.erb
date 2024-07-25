@@ -54,10 +54,11 @@
             <p class="card-text"><strong><%= number_to_currency(product.price) %></strong></p>
           </div>
           <div class="card-footer">
-            <%= link_to 'Show', product_path(product), class: "btn btn-primary" %>
-            <%= link_to 'Add to Cart', add_to_cart_cart_path(product), method: :post, class: "btn btn-secondary" %>
-            <%#= link_to 'Edit', edit_product_path(product), class: "btn btn-secondary" %>
-            <%#= link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+              <div class="text-center" style="margin-top: 20px;">
+                 <%= link_to 'Add to Cart', add_to_cart_cart_path(product), class: 'btn btn-success', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #28a745; border: none;" %>
+             
+                <%= link_to 'Show', product_path(product),method: :post, class: 'btn btn-secondary', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #6c757d; border: none;" %>
+              </div>
           </div>
         </div>
       </div>
