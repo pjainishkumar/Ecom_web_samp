@@ -9,4 +9,7 @@ Rails.application.routes.draw do
     get 'remove_from_cart/:product_id', to: 'carts#remove_from_cart', as: 'remove_from_cart'
     patch 'update_quantity/:product_id', to: 'carts#update_quantity', as: 'update_quantity'
   end
+  resource :checkout, only: [:new, :create] do
+    get 'success'
+  end
 end
