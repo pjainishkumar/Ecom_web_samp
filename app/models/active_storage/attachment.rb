@@ -1,8 +1,9 @@
 class ActiveStorage::Attachment < ApplicationRecord
   # Other model code...
-  belongs_to :record, polymorphic: true, inverse_of: :active_storage_attachments
+    belongs_to :record, polymorphic: true
+    belongs_to :blob, class_name: "ActiveStorage::Blob", inverse_of: :attachments
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["blob_id", "created_at", "id", "name", "record_id", "record_type"]
-  end
+    validates :name, :record, :blob, presence: true
+    has_many :image_blob, :through => :image_attachment
+ 
 end
