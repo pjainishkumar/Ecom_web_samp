@@ -1,0 +1,15 @@
+<%= form_with model: @product, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %>
+
+  <%= form.label :price %>
+  <%= form.number_field :price %>
+
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+
+  <%= form.submit %>
+<% end %>

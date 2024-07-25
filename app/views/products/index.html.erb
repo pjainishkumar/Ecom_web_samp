@@ -1,31 +1,73 @@
-<!-- app/views/products/index.html.erb -->
-<h1>All Products</h1>
-<div>
-  <%= form_with url: products_path, method: :get, local: true do %>
-    <%= label_tag :search, "Search Products" %>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search" %>
-  <% end %>
-</div>
-<div>
-  <% ["Electronics", "Books", "Clothing", "Home Appliances"].each do |category| %>
-    <%= link_to category, products_path(category: category) %> |
-  <% end %>
-</div>
-<div>
-  <%= link_to 'On Sale', products_path(filter: 'on_sale') %> |
-  <%= link_to 'New', products_path(filter: 'new') %> |
-  <%= link_to 'Recently Updated', products_path(filter: 'recently_updated') %>
-</div>
-<div>
-  <% @products.each do |product| %>
-    <div>
-      <h2><%= link_to product.name, product_path(product) %></h2>
-      <p><%= product.description.truncate(100) %></p>
-      <p>Price: $<%= product.price %></p>
+<h1>Products</h1>
+
+<div class="container mb-4">
+  <div class="row mb-3">
+    <div class="col">
+      <%= form_with url: products_path, method: :get, local: true, class: "form-inline" do %>
+        <div class="form-group mx-sm-3 mb-2">
+          <%= label_tag :search, "Search Products", class: "sr-only" %>
+          <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Products" %>
+        </div>
+        <%= submit_tag "Search", class: "btn btn-primary mb-2" %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <nav class="nav">
+        <% ["Electronics", "Books", "Clothing", "Home Appliances"].each do |category| %>
+          <%= link_to category, products_path(category: category), class: "nav-link" %>
+        <% end %>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <nav class="nav">
+        <%= link_to 'On Sale', products_path(filter: 'on_sale'), class: "nav-link" %>
+        <%= link_to 'New', products_path(filter: 'new'), class: "nav-link" %>
+        <%= link_to 'Recently Updated', products_path(filter: 'recently_updated'), class: "nav-link" %>
+      </nav>
+    </div>
+  </div>
 </div>
-<div>
-  <%= paginate @products %>
+
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @products.each do |product| %>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-img-top" style="height: 200px; object-fit: cover; background-color: #f8f9fa;">
+            <% if product.image.attached? %>
+              <%= image_tag product.image, style: "width: 100%; height: 100%; object-fit: cover;" %>
+            <% else %>
+              <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <span>No Image</span>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= product.description %></p>
+            <p class="card-text"><strong><%= number_to_currency(product.price) %></strong></p>
+          </div>
+          <div class="card-footer">
+            <%= link_to 'Show', product_path(product), class: "btn btn-primary" %>
+            <%= link_to 'Edit', edit_product_path(product), class: "btn btn-secondary" %>
+            <%= link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= render 'kaminari/paginator', collection: @products %>
+    </div>
+  </div>
 </div>
+
+<%= link_to 'New Product', new_product_path, class: "btn btn-success mt-3" %>

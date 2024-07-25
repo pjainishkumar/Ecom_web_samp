@@ -1,7 +1,20 @@
-<!-- app/views/products/show.html.erb -->
-<h1><%= @product.name %></h1>
-<p><%= @product.description %></p>
-<p>Price: $<%= @product.price %></p>
-<p>Category: <%= @product.category %></p>
-<p>On Sale: <%= @product.on_sale ? "Yes" : "No" %></p>
-<p>New: <%= @product.new ? "Yes" : "No" %></p>
+<div class="container mt-5">
+  <div class="card" style="width: 24rem; margin: 0 auto;">
+    <div class="card-img-top" style="height: 300px; object-fit: cover; background-color: #f8f9fa;">
+      <% if @product.image.attached? %>
+        <%= image_tag @product.image, style: "width: 100%; height: 100%; object-fit: cover;" %>
+      <% else %>
+        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+          <span>No Image</span>
+        </div>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title"><%= @product.name %></h1>
+      <p class="card-text"><strong>Description:</strong> <%= @product.description %></p>
+      <p class="card-text"><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
+      <%#= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
+      <%= link_to 'Back', products_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

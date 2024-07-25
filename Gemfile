@@ -40,6 +40,10 @@ gem 'faker'
 
 #pagination
 gem 'kaminari'
+gem 'kaminari-bootstrap'
+
+gem 'ransack', '~> 2.4'
+
 
 #bootstrap for frontend 
 gem 'bootstrap', '~> 5.1.0'
