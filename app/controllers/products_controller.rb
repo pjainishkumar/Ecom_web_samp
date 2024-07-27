@@ -1,15 +1,31 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   
-  def index
+ def index
     @products = Product.all
-    @products = @products.where(category: params[:category]) if params[:category].present?
-    @products = @products.where(on_sale: true) if params[:filter] == 'on_sale'
-    @products = @products.where(new: true) if params[:filter] == 'new'
-    @products = @products.order(updated_at: :desc) if params[:filter] == 'recently_updated'
-    @products = @products.where("name LIKE ?", "%#{params[:search]}%") if params[:search].present?
+
+    if params[:search].present?
+      @products = @products.where("name LIKE ?", "%#{params[:search]}%")
+    end
+
+    if params[:category].present?
+      @products = @products.where(category: params[:category])
+    end
+
+    if params[:filter].present?
+      case params[:filter]
+      when 'on_sale'
+        @products = @products.where(on_sale: true)
+      when 'new'
+        @products = @products.where(new: true)
+      when 'recently_updated'
+        @products = @products.where(updated_at: 1.week.ago..Date.today).order(updated_at: :desc)
+      end
+    end
+
     @products = @products.page(params[:page]).per(10)
   end
+
   
   def new
     @product = Product.new

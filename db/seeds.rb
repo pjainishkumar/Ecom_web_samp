@@ -7,13 +7,13 @@
 #   Character.create(name: "Luke", movie: movies.first)
 User.find_or_create_by(email: 'normal@example.com',admin: true) if Rails.env.development?
 # AdminUser.find_or_create_by(email: 'admin@example.com',admin: true) 
-AdminUser.create!(email: "admin@email.com",password: 'password')
+AdminUser.find_or_create_by(email: "admin@email.com")
 
 
-categories = ['Electronics', 'Furniture', 'Clothing', "Home Appliances"]
+categories = ['Silicon Cover', 'Flip Cover', 'Plastic Cover', 'Custom Cover']
 
 
-30.times do
+100.times do
   # Generate a fake image URL
   image_url = Faker::LoremFlickr.image(size: "300x300", search_terms: ['product'])
 
@@ -35,3 +35,6 @@ categories = ['Electronics', 'Furniture', 'Clothing', "Home Appliances"]
     }
   )
 end
+
+User.find_by(email: 'normal@example.com').update(password: "password") if Rails.env.development?
+AdminUser.find_by(email: 'normal@example.com').update(password: "password")

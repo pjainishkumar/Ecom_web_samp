@@ -12,6 +12,7 @@ class CartsController < ApplicationController
 
   def add_to_cart
     product_id = params[:product_id].to_s
+    session[:cart] = {} if session[:cart].is_a? Array
     session[:cart][product_id] ||= 0
     session[:cart][product_id] += 1
     redirect_to cart_path, notice: 'Product added to cart.'
