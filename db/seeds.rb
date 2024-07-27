@@ -5,9 +5,18 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-User.find_or_create_by(email: 'normal@example.com',admin: true) if Rails.env.development?
+if Rails.env.development? and User.find_by(email: 'normal@example.com').nil?
+  user = User.new(email: 'normal@example.com',admin: true)
+  user.password = "password"
+  user.save!
+end 
 # AdminUser.find_or_create_by(email: 'admin@example.com',admin: true) 
-AdminUser.find_or_create_by(email: "admin@email.com")
+if Rails.env.development? and AdminUser.find_by(email: "admin@email.com").nil?
+  user = AdminUser.new(email: 'normal@example.com')
+  user.password = "password"
+  user.save!
+end 
+
 
 
 categories = ['Silicon Cover', 'Flip Cover', 'Plastic Cover', 'Custom Cover']
@@ -36,5 +45,25 @@ categories = ['Silicon Cover', 'Flip Cover', 'Plastic Cover', 'Custom Cover']
   )
 end
 
-User.find_by(email: 'normal@example.com').update(password: "password") if Rails.env.development?
-AdminUser.find_by(email: 'normal@example.com').update(password: "password")
+# db/seeds.rb
+
+# List of provinces to seed
+provinces = [
+  { name: 'Alberta' },
+  { name: 'British Columbia' },
+  { name: 'Manitoba' },
+  { name: 'New Brunswick' },
+  { name: 'Newfoundland and Labrador' },
+  { name: 'Nova Scotia' },
+  { name: 'Ontario' },
+  { name: 'Prince Edward Island' },
+  { name: 'Quebec' },
+  { name: 'Saskatchewan' }
+]
+
+# Create provinces
+provinces.each do |province|
+  Province.find_or_create_by(province)
+end
+
+puts "Provinces have been seeded."

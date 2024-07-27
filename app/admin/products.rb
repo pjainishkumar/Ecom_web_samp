@@ -1,5 +1,6 @@
 ActiveAdmin.register Product do
-  permit_params :name, :description, :price, :category, :on_sale, :new
+  # Permit the image parameter along with other attributes
+  permit_params :name, :description, :price, :category, :on_sale, :new, :image
 
   index do
     selectable_column
@@ -10,6 +11,13 @@ ActiveAdmin.register Product do
     column :category
     column :on_sale
     column :new
+    column :image do |product|
+      if product.image.attached?
+        image_tag product.image, size: "100x100" # Adjust size as needed
+      else
+        "No image"
+      end
+    end
     actions
   end
 
@@ -21,7 +29,7 @@ ActiveAdmin.register Product do
   filter :created_at
   filter :updated_at
 
-  form do |f|
+  form html: { multipart: true } do |f|
     f.inputs do
       f.input :name
       f.input :description
@@ -29,7 +37,7 @@ ActiveAdmin.register Product do
       f.input :category
       f.input :on_sale
       f.input :new
-      f.input :image, as: :file
+      f.input :image, as: :file # Ensure file input is included
     end
     f.actions
   end
@@ -43,7 +51,11 @@ ActiveAdmin.register Product do
       row :on_sale
       row :new
       row :image do |product|
-        image_tag product.image if product.image.attached?
+        if product.image.attached?
+          image_tag product.image, size: "200x200" # Adjust size as needed
+        else
+          "No image"
+        end
       end
     end
     active_admin_comments
