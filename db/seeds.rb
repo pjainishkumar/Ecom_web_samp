@@ -67,3 +67,35 @@ provinces.each do |province|
 end
 
 puts "Provinces have been seeded."
+
+# db/seeds.rb
+
+SiteContent.create(
+  about_us: <<-HTML
+    <h2>About Us</h2>
+    <p>Welcome to our company! We are committed to providing the best services and products to our customers. Our team is dedicated to innovation and excellence. Thank you for choosing us as your trusted partner.</p>
+  HTML
+  ,
+  contact_us: <<-HTML
+    <h2>Contact Us</h2>
+    <p>Get in touch with us! For any inquiries or support, you can reach us at:</p>
+    <ul>
+      <li>Email: <a href="mailto:support@company.com">support@company.com</a></li>
+      <li>Phone: (123) 456-7890</li>
+      <li>Address: 123 Main Street, Anytown, USA</li>
+    </ul>
+  HTML
+  ,
+  career: <<-HTML
+    <h2>Career</h2>
+    <p>Join our team! We are always looking for talented and passionate individuals to join our company. Explore our current job openings and apply today to become a part of our dynamic and growing team.</p>
+  HTML
+  ,
+  general: <<-HTML
+    <h2>General</h2>
+    <p>Stay updated with the latest news and announcements from our company. Check this section regularly for updates on new products, services, and events.</p>
+  HTML
+)
+
+puts "Sample site content created!"
+

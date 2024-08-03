@@ -1,8 +1,10 @@
+@import 'products';
 /*
  *= require_tree .
  *= require_self
 */
 @import 'bootstrap';
+@import "site_contents";
 /*
  *= require bootstrap
  */

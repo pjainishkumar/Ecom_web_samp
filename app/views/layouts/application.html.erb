@@ -1,29 +1,66 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>YourAppName</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
   
-  <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <head>
+    <title>YourAppName</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-</head>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    
+    <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-<body>
-  <nav>
-    <% if user_signed_in? %>
-      Hello, <%= current_user.email %>!
-      <%= link_to 'Edit profile', edit_user_registration_path %> |
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to 'Sign up', new_user_registration_path %> or
-      <%= link_to 'Login', new_user_session_path %>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <% @site_content = SiteContent.first %>
+          <% if @site_content.present? %>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutUsModal">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#contactUsModal">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#careerModal">Career</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#generalModal">General</a>
+            </li>
+          <% end %>
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              Hello, <%= current_user.email %>!
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Edit profile', edit_user_registration_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Login', new_user_session_path, class: 'nav-link' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+    <%= yield %>
+
+    <% if @site_content.present? %>
+      <%= render '/site_contents/modal' %>
     <% end %>
-  </nav>
-
-  <%= yield %>
-</body>
+  </body>
 </html>

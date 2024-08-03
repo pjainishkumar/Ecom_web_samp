@@ -1,0 +1,117 @@
+// products.scss
+
+// General styles
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+// Sidebar styles
+.sidebar {
+  position: fixed;
+  right: -300px; // Hidden by default
+  top: 60;
+  width: 300px;
+  height: 100%;
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: left 0.3s ease-in-out;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sidebar.show {
+  right: 0;
+}
+
+// Toggle button styles
+#toggle-sidebar {
+  position: fixed;
+  right: 5px;
+  top: 20px;
+  z-index: 1100;
+}
+
+// Form styles inside sidebar
+.sidebar .form-group {
+  margin-bottom: 1rem;
+
+  .form-control {
+    width: 100%;
+  }
+}
+
+// Form button styles
+.sidebar .btn {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+// Card styles
+.card {
+  display: flex;
+  flex-direction: column;
+
+  .card-img-top {
+    background-color: #f8f9fa;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    .img-fluid {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .no-image {
+      font-size: 1.2rem;
+      color: #6c757d;
+    }
+  }
+
+  .card-body {
+    flex: 1;
+  }
+
+  .card-footer {
+    text-align: center;
+    margin-top: auto;
+
+    .btn-action {
+      padding: 12px 20px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      color: #ffffff;
+      text-decoration: none;
+      border: none;
+      display: inline-block;
+      margin-bottom: 10px;
+
+      &.btn-success {
+        background-color: #28a745;
+      }
+
+      &.btn-secondary {
+        background-color: #6c757d;
+      }
+    }
+  }
+}
+
+// Go to cart button styles
+.btn-cart {
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #6c757d;
+  border: none;
+  display: block;
+  margin: 2rem auto;
+  text-align: center;
+}

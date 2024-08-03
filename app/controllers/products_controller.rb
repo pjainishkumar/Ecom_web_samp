@@ -19,7 +19,7 @@ class ProductsController < ApplicationController
       when 'new'
         @products = @products.where(new: true)
       when 'recently_updated'
-        @products = @products.where(updated_at: 1.week.ago..Date.today).order(updated_at: :desc)
+        @products = @products.where(updated_at: 3.days.ago..Date.today).order(updated_at: :desc)
       end
     end
 

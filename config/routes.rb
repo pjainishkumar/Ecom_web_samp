@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'site_contents/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: {
@@ -22,4 +23,5 @@ Rails.application.routes.draw do
     get 'success'
   end
   resources :orders, only: [:new, :create, :show, :index]
+  get 'site_contents', to: 'site_contents#show', as: 'site_contents'
 end

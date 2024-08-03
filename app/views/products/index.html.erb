@@ -1,57 +1,44 @@
 <h1>Products</h1>
 
+<!-- Toggle Button -->
+<button id="toggle-sidebar" class="btn btn-primary">Apply Filter</button>
 
-
-<div class="container mb-4">
+<!-- Sidebar Form -->
+<div id="sidebar" class="sidebar">
   <%= form_with url: products_path, method: :get, local: true, class: "form-inline" do %>
-    <div class="row mb-3">
-      <div class="col">
-        <div class="form-group mx-sm-3 mb-2">
-          <%= label_tag :search, "Search Products", class: "sr-only" %>
-          <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Products" %>
-        </div>
-      </div>
+    <div class="form-group">
+      <%= label_tag :search, "Search Products", class: "sr-only" %>
+      <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Products" %>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
-        <div class="form-group mx-sm-3 mb-2">
-          <%= label_tag :category, "Category", class: "sr-only" %>
-          <%= select_tag :category, options_for_select(['Silicon Cover', 'Flip Cover', 'Plastic Cover', 'Custom Cover'], params[:category]), include_blank: true, class: "form-control" %>
-        </div>
-      </div>
+    <div class="form-group">
+      <%= label_tag :category, "Category", class: "sr-only" %>
+      <%= select_tag :category, options_for_select(['Silicon Cover', 'Flip Cover', 'Plastic Cover', 'Custom Cover'], params[:category]), include_blank: true, class: "form-control" %>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
-        <div class="form-group mx-sm-3 mb-2">
-          <%= label_tag :filter, "Filter", class: "sr-only" %>
-          <%= select_tag :filter, options_for_select([['On Sale', 'on_sale'], ['New', 'new'], ['Recently Updated', 'recently_updated']], params[:filter]), include_blank: true, class: "form-control" %>
-        </div>
-      </div>
+    <div class="form-group">
+      <%= label_tag :filter, "Filter", class: "sr-only" %>
+      <%= select_tag :filter, options_for_select([['On Sale', 'on_sale'], ['New', 'new'], ['Recently Updated', 'recently_updated']], params[:filter]), include_blank: true, class: "form-control" %>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
-        <%= submit_tag "Apply Filter", class: "btn btn-primary mb-2" %>
-        <%= link_to "Remove Filter", products_path, class: "btn btn-secondary mb-2" %>
-      </div>
+    <div class="form-group">
+      <%= submit_tag "Apply Filter", class: "btn btn-primary" %>
+      <%= link_to "Remove Filter", products_path, class: "btn btn-secondary" %>
     </div>
   <% end %>
 </div>
 
+<!-- Product List -->
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @products.each do |product| %>
       <div class="col">
         <div class="card h-100">
-          <div class="card-img-top" style="height: 200px; object-fit: cover; background-color: #f8f9fa;">
+          <div class="card-img-top product-image">
             <% if product.image.attached? %>
-              <%= image_tag product.image, style: "width: 100%; height: 100%; object-fit: cover;" %>
+              <%= image_tag product.image, class: "img-fluid" %>
             <% else %>
-              <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                <span>No Image</span>
-              </div>
+              <div class="no-image">No Image</div>
             <% end %>
           </div>
           <div class="card-body">
@@ -59,12 +46,9 @@
             <p class="card-text"><%= product.description %></p>
             <p class="card-text"><strong><%= number_to_currency(product.price) %></strong></p>
           </div>
-          <div class="card-footer">
-              <div class="text-center" style="margin-top: 20px;">
-                 <%= link_to 'Add to Cart', add_to_cart_cart_path(product), class: 'btn btn-success', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #28a745; border: none;" %>
-             
-                <%= link_to 'Show', product_path(product),method: :post, class: 'btn btn-secondary', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #6c757d; border: none;" %>
-              </div>
+          <div class="card-footer text-center">
+            <%= link_to 'Add to Cart', add_to_cart_cart_path(product), class: 'btn btn-success btn-action' %>
+            <%= link_to 'Show', product_path(product), method: :post, class: 'btn btn-secondary btn-action' %>
           </div>
         </div>
       </div>
@@ -78,4 +62,18 @@
   </div>
 </div>
 
-<%= link_to 'Go TO Cart', cart_path, class: 'btn btn-secondary', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #6c757d; border: none;"  %>
+<%= link_to 'Go TO Cart', cart_path, class: 'btn btn-secondary btn-cart' %>
+
+
+<script type="text/javascript">
+  // sidebar.js
+
+document.addEventListener("DOMContentLoaded", function() {
+  const toggleButton = document.getElementById("toggle-sidebar");
+  const sidebar = document.getElementById("sidebar");
+
+  toggleButton.addEventListener("click", function() {
+    sidebar.classList.toggle("show");
+  });
+});
+</script>
