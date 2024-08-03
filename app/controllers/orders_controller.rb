@@ -28,6 +28,10 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def index
+    @orders = Order.all
+  end 
+
   private
 
   # Ensure that there is at least one item in the cart
