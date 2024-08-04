@@ -1,29 +1,28 @@
-
-
 <!-- Toggle Button -->
-<br><br><br>
-<button id="toggle-sidebar" class="btn btn-gradient ">Apply Filter</button>
+<div class="text-center my-4">
+  <button id="toggle-sidebar" class="btn btn-gradient">Apply Filter</button>
+</div>
 
 <!-- Sidebar Form -->
 <div id="sidebar" class="sidebar">
   <%= form_with url: products_path, method: :get, local: true, class: "form-inline" do %>
-    <div class="form-group">
+    <div class="form-group mb-3">
       <%= label_tag :search, "Search Products", class: "sr-only" %>
       <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search Products" %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
       <%= label_tag :category, "Category", class: "sr-only" %>
-      <%= select_tag :category, options_for_select(['Silicon Cover', 'Flip Cover', 'Plastic Cover', 'Custom Cover'], params[:category]), include_blank: true, class: "form-control" %>
+      <%= select_tag :category, options_for_select(@categories, params[:category]), include_blank: true, class: "form-control" %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
       <%= label_tag :filter, "Filter", class: "sr-only" %>
       <%= select_tag :filter, options_for_select([['On Sale', 'on_sale'], ['New', 'new'], ['Recently Updated', 'recently_updated']], params[:filter]), include_blank: true, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= submit_tag "Apply Filter", class: "btn btn-primary" %>
+      <%= submit_tag "Apply Filter", class: "btn btn-primary me-2" %>
       <%= link_to "Remove Filter", products_path, class: "btn btn-gradient" %>
     </div>
   <% end %>
@@ -34,7 +33,7 @@
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <% @products.each do |product| %>
       <div class="col">
-        <div class="card h-100">
+        <div class="card h-100 product-image">
           <div class="card-img-top product-image">
             <% if product.image.attached? %>
               <%= image_tag product.image, class: "img-fluid" %>
@@ -47,18 +46,16 @@
             <p class="card-text"><%= product.description %></p>
             <p class="card-text"><strong><%= number_to_currency(product.price) %></strong></p>
           </div>
-          <div class="card-footer text-center" style="display: grid;">
-            <%= link_to 'Add to Cart', add_to_cart_cart_path(product), class: 'btn btn-gradient m-2'%>
-            <%= link_to 'Show', product_path(product), method: :post, class: 'btn-sm btn-success btn-action m-2' %>
+          <div class="card-footer text-center d-grid gap-2" style="display: grid; width: 100%;">
+            <%= link_to 'Add to Cart', add_to_cart_cart_path(product), class: 'btn btn-gradient' %>
+            <%= link_to 'Show', product_path(product), method: :post, class: 'btn btn-success btn-sm' %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 
-<br><br><br>
-
-  <div class="row">
+  <div class="row my-4">
     <div class="col">
       <%= render 'kaminari/paginator', collection: @products %>
     </div>
@@ -67,16 +64,13 @@
 
 <%= link_to 'Go TO Cart', cart_path, class: 'btn btn-secondary btn-cart' %>
 
-
 <script type="text/javascript">
-  // sidebar.js
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggleButton = document.getElementById("toggle-sidebar");
+    const sidebar = document.getElementById("sidebar");
 
-document.addEventListener("DOMContentLoaded", function() {
-  const toggleButton = document.getElementById("toggle-sidebar");
-  const sidebar = document.getElementById("sidebar");
-
-  toggleButton.addEventListener("click", function() {
-    sidebar.classList.toggle("show");
+    toggleButton.addEventListener("click", function() {
+      sidebar.classList.toggle("show");
+    });
   });
-});
 </script>

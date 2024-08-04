@@ -29,7 +29,7 @@ h1 {
 #toggle-sidebar {
   position: fixed;
   right: 5px;
-  top: 60px;
+  top: 200px;
   z-index: 1100;
 }
 
@@ -183,6 +183,47 @@ h1 {
 
 .btn-secondary:hover {
   background-color: #5a6268; /* Darker grey on hover */
+}
+
+
+/* Styles for Product Image */
+.product-image {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease; /* Smooth transformation */
+}
+
+/* Keyframe animation for rotation */
+@keyframes rotateYAnimation {
+  from {
+    transform: rotateY(1deg) translateY(-10px);
+  }
+  to {
+    transform: rotateY(360deg) translateY(-10px);
+  }
+}
+
+/* Apply the animation on hover */
+.product-image:hover {
+  animation: rotateYAnimation 1.5s forwards; /* Rotate from 1 to 360 degrees */
+}
+
+/* Ensure the image covers the area */
+.product-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 

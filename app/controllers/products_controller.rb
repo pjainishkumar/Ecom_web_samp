@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[show edit update destroy]
 
   def index
+    @categories = Category.all.pluck(:name)
     @products = Product.all
 
     @products = @products.where('name LIKE ?', "%#{params[:search]}%") if params[:search].present?

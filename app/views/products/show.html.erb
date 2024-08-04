@@ -1,27 +1,141 @@
 <!-- app/views/products/show.html.erb -->
-<div class="container mt-5" style="max-width: 100%; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
-  <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+<div class="container mt-5">
+  <div class="product-details">
     <!-- Product Image -->
-    <div style="width: 100%; max-width: 600px; height: 400px; display: flex; align-items: center; justify-content: center; background-color: #ffffff; margin-bottom: 20px;">
+    <div class="product-image">
       <% if @product.image.attached? %>
-        <%= image_tag @product.image, style: "width: 100%; height: 100%; object-fit: cover;" %>
+        <%= image_tag @product.image, class: 'img-fluid product-image-img' %>
       <% else %>
-        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #e9ecef; color: #6c757d;">
+        <div class="no-image">
           <span>No Image</span>
         </div>
       <% end %>
     </div>
 
     <!-- Product Details -->
-    <div style="width: 100%; max-width: 600px; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-      <h1 style="margin-bottom: 20px; font-size: 2rem; color: #333333;"><%= @product.name %></h1>
-      <p style="margin-bottom: 10px; font-size: 1.2rem; color: #333333;"><strong>Description:</strong> <%= @product.description %></p>
-      <p style="margin-bottom: 20px; font-size: 1.2rem; color: #333333;"><strong>Price:</strong> <%= number_to_currency(@product.price) %></p>
-
-      <div style="display: flex; justify-content: center; gap: 10px;">
-        <%= link_to 'Add to Cart', add_to_cart_cart_path(@product), class: 'btn btn-success', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #28a745; border: none;" %>
-        <%= link_to 'Back', products_path, class: 'btn btn-secondary', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #6c757d; border: none;" %>
+    <div class="product-info">
+      <h1 class="product-name"><%= @product.name %></h1>
+      <p class="product-description">
+        <strong>Description:</strong> <%= @product.description %>
+      </p>
+      <p class="product-price">
+        <strong>Price:</strong> <%= number_to_currency(@product.price) %>
+      </p>
+      <div class="card-footer text-center" style="display: grid;">
+        <%= link_to 'Add to Cart', add_to_cart_cart_path(@product), class: 'btn btn-gradient m-2'%>
+        <%= link_to link_to 'Back', products_path, class: 'btn-sm btn-success btn-action m-2' %>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Include this in your stylesheet -->
+<style>
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .product-image {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-image-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the area */
+    border-radius: 8px;
+  }
+
+  .no-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9ecef;
+    color: #6c757d;
+    font-size: 1.2rem;
+    border-radius: 8px;
+  }
+
+  .product-info {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-name {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333333;
+  }
+
+  .product-description,
+  .product-price {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #333333;
+  }
+
+  .product-price {
+    margin-bottom: 20px;
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+</style>

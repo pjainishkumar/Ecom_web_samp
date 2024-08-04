@@ -15,9 +15,11 @@ body {
 
 /* Style the navigation bar */
 header {
-  background: url('/path/to/your/background-image.jpg') no-repeat center center; /* Background image for the header */
   background-size: cover; /* Cover the entire header area */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  height: 200px;
+  padding-top: 50px;
+  background: linear-gradient(45deg, #e6f0f3, #d0eee5);
 }
 
 .navbar {

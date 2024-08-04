@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Product do
   # Permit the image parameter along with other attributes
-  permit_params :name, :description, :price, :category, :on_sale, :new, :image
+  permit_params :name, :description, :price, :category_id, :on_sale, :new, :image
 
   index do
     selectable_column
@@ -36,7 +36,7 @@ ActiveAdmin.register Product do
       f.input :name
       f.input :description
       f.input :price
-      f.input :category
+      f.input :category, as: :select, collection: Category.all.collect { |category| [category.name, category.id] }
       f.input :on_sale
       f.input :new
       f.input :image, as: :file # Ensure file input is included
