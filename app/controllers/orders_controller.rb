@@ -2,7 +2,7 @@
 
 # app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!, only: %i[new create index]
   before_action :ensure_cart_present, only: %i[new create]
   after_action :send_confirmation_sms, only: %i[create]
 
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
+    @orders = current_user.orders
   end
 
   private

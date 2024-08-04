@@ -12,18 +12,19 @@ module Users
     end
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: sign_up_params)
-      devise_parameter_sanitizer.permit(:account_update, keys: account_update_params)
-    end
-
-    private
-
-    def sign_up_params
-      %i[email password password_confirmation addresses_attributes]
-    end
-
-    def account_update_params
-      %i[email password password_confirmation current_password addresses_attributes]
+      devise_parameter_sanitizer.permit(:sign_up, keys: [
+        :email, 
+        :password, 
+        :password_confirmation, 
+        addresses_attributes: [:id, :street, :city, :postal_code, :province_id, :_destroy]
+      ])
+      devise_parameter_sanitizer.permit(:account_update, keys: [
+        :email, 
+        :password, 
+        :password_confirmation, 
+        :current_password, 
+        addresses_attributes: [:id, :street, :city, :postal_code, :province_id, :_destroy]
+      ])
     end
   end
 end
