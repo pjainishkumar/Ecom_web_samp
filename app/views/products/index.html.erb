@@ -1,7 +1,8 @@
-<h1>Products</h1>
+
 
 <!-- Toggle Button -->
-<button id="toggle-sidebar" class="btn btn-primary">Apply Filter</button>
+<br><br><br>
+<button id="toggle-sidebar" class="btn btn-gradient ">Apply Filter</button>
 
 <!-- Sidebar Form -->
 <div id="sidebar" class="sidebar">
@@ -23,7 +24,7 @@
 
     <div class="form-group">
       <%= submit_tag "Apply Filter", class: "btn btn-primary" %>
-      <%= link_to "Remove Filter", products_path, class: "btn btn-secondary" %>
+      <%= link_to "Remove Filter", products_path, class: "btn btn-gradient" %>
     </div>
   <% end %>
 </div>
@@ -46,14 +47,16 @@
             <p class="card-text"><%= product.description %></p>
             <p class="card-text"><strong><%= number_to_currency(product.price) %></strong></p>
           </div>
-          <div class="card-footer text-center">
-            <%= link_to 'Add to Cart', add_to_cart_cart_path(product), class: 'btn btn-success btn-action' %>
-            <%= link_to 'Show', product_path(product), method: :post, class: 'btn btn-secondary btn-action' %>
+          <div class="card-footer text-center" style="display: grid;">
+            <%= link_to 'Add to Cart', add_to_cart_cart_path(product), class: 'btn btn-gradient m-2'%>
+            <%= link_to 'Show', product_path(product), method: :post, class: 'btn-sm btn-success btn-action m-2' %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
+
+<br><br><br>
 
   <div class="row">
     <div class="col">

@@ -1,13 +1,118 @@
-@import 'products';
-/*
- *= require_tree .
- *= require_self
-*/
 @import 'bootstrap';
-@import "site_contents";
-/*
- *= require bootstrap
- */
+@import 'products';
+@import 'site_contents';
+
+/* Apply a very subtle gradient background to the body */
+body {
+  background: linear-gradient(to right, #f2f9f4, #ffffff); /* Very light green to white gradient */
+  color: #333; /* Dark text color for contrast */
+  font-family: Arial, sans-serif; /* Font family */
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* Style the navigation bar */
+header {
+  background: url('/path/to/your/background-image.jpg') no-repeat center center; /* Background image for the header */
+  background-size: cover; /* Cover the entire header area */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.navbar {
+  padding: 10px 20px;
+  width: 1000px; /* Set width to 1000px */
+  margin: 0 auto; /* Center align the navbar */
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #333; /* Dark text color */
+  padding: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  background-color: #f9f9f9; /* Very light grey background on hover */
+  color: #a5d6a7; /* Very subtle green color on hover */
+}
+
+.navbar-brand {
+  color: #a5d6a7; /* Very subtle green color for brand */
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+/* Card Styles */
+.card {
+  border: 1px solid #e0e0e0; /* Light grey border for cards */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensure no overflow */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #ffffff; /* White background for the card */
+  transition: box-shadow 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slightly larger shadow on hover */
+  transform: translateY(-4px); /* Lift card on hover */
+}
+
+.card-img-top {
+  height: 200px; /* Fixed height for image */
+  object-fit: cover; /* Cover image to fill container */
+  background-color: #f9f9f9; /* Light grey background if no image */
+}
+
+.card-body {
+  padding: 20px; /* Padding inside card body */
+}
+
+.card-title {
+  font-size: 1.25rem; /* Font size for card title */
+  color: #333; /* Dark text color for contrast */
+  margin-bottom: 0.5rem; /* Spacing below title */
+}
+
+.card-text {
+  color: #666; /* Slightly lighter text color for content */
+  margin-bottom: 1rem; /* Spacing below text */
+}
+
+.card-footer {
+  padding: 10px 20px; /* Padding inside card footer */
+  background-color: #f9f9f9; /* Light grey background for footer */
+  text-align: center; /* Center-align footer content */
+}
+
+.btn {
+  padding: 12px 20px; /* Padding for buttons */
+  font-size: 1.2rem; /* Font size for buttons */
+  border-radius: 5px; /* Rounded corners for buttons */
+  color: #ffffff; /* White text color */
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+}
+
+.btn-success {
+  background-color: #a5d6a7; /* Very subtle green background */
+  border: none; /* Remove border */
+}
+
+.btn-success:hover {
+  background-color: #88c9a5; /* Slightly darker green on hover */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Grey background for secondary buttons */
+  border: none; /* Remove border */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Darker grey on hover */
+}
+
+/* Pagination Styles */
 .pagination {
   display: flex;
   justify-content: center;
@@ -38,6 +143,7 @@
   color: #6c757d;
   cursor: not-allowed;
 }
+
 /* General Form Styles */
 form {
   max-width: 600px;
@@ -130,4 +236,59 @@ a {
   &:hover {
     text-decoration: underline;
   }
+}
+
+header {
+  background: url('/path/to/your/background-image.jpg') no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  padding: 10px 20px;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #333;
+  padding: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  background-color: #f9f9f9;
+  color: #a5d6a7;
+}
+
+.navbar-brand {
+  color: #a5d6a7;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 991.98px) {
+  .navbar {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Gradient button class */
+.btn-gradient {
+  background: linear-gradient(45deg, #00b4d8, #00f0a4); /* Green to blue gradient */
+  color: #ffffff; /* White text color */
+  text-decoration: none; /* Remove underline from links */
+  padding: 12px 20px; /* Padding for buttons */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1rem; /* Font size */
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+  display: inline-block; /* Ensure button-like appearance */
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(45deg, #00f0a4, #00b4d8); /* Reverse gradient on hover */
+  color: #ffffff; /* Maintain white text color on hover */
 }

@@ -12,53 +12,65 @@
     <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <% @site_content = SiteContent.first %>
-          <% if @site_content.present? %>
-            <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutUsModal">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#contactUsModal">Contact Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#careerModal">Career</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#generalModal">General</a>
-            </li>
-            <% if user_signed_in? %>
-              <li class="nav-item">
-                <%= link_to 'Edit Profile', edit_user_registration_path, class: 'nav-link'%> 
-              </li>
-              <li class="nav-item">  
-                <%= link_to 'Sign out', destroy_user_session_path, method: :delete , class: 'nav-link'%>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to 'Sign up', new_user_registration_path , class: 'nav-link'%>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'Log in', new_user_session_path, class: 'nav-link' %>
-              </li>
-            <% end %>  
-          <% end %>
-        </ul>
-      </div>
-    </nav>
-
-    <%= yield %>
-
+ <body>
+ <header>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="<%= root_path %>">
+     <svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ecom-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b4d8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f0a4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <text x="10" y="40" font-family="Arial, sans-serif" font-size="36" fill="url(#ecom-gradient)" font-weight="bold">Ecom</text>
+  <text x="10" y="60" font-family="Arial, sans-serif" font-size="24" fill="url(#ecom-gradient)" font-weight="bold">Hub</text>
+  <circle cx="170" cy="30" r="20" fill="url(#ecom-gradient)" />
+  <rect x="155" y="10" width="20" height="20" fill="url(#ecom-gradient)" />
+</svg></a>
+    <% @site_content = SiteContent.first %>
     <% if @site_content.present? %>
-      <%= render '/site_contents/modal' %>
+      <div class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutUsModal">About Us</a>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#contactUsModal">Contact Us</a>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#careerModal">Career</a>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#generalModal">General</a>
+      </div>
     <% end %>
+    <div class="nav-item">
+      <%= link_to 'Orders', orders_path, class: 'nav-link' %>
+    </div>
+    <% if user_signed_in? %>
+      <div class="nav-item">
+        <%= link_to 'Edit Profile', edit_user_registration_path, class: 'nav-link' %> 
+      </div>
+      <div class="nav-item">  
+        <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+      </div>
+    <% else %>
+      <div class="nav-item">
+        <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+      </div>
+      <div class="nav-item">
+        <%= link_to 'Log in', new_user_session_path, class: 'nav-link' %>
+      </div>
+    <% end %>  
+  </nav>
+  </header>
 
-  </body>
+  <main>
+    <%= yield %>
+  </main>
+
+  <% if @site_content.present? %>
+    <%= render '/site_contents/modal' %>
+  <% end %>
+
+</body>
 </html>
