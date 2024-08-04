@@ -63,6 +63,11 @@
     <% end %>  
   </nav>
   </header>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+  <% end %>
 
   <main>
     <%= yield %>
@@ -74,3 +79,13 @@
 
 </body>
 </html>
+<script type="text/javascript">
+  
+$(document).on('turbolinks:load', function() {
+  setTimeout(function() {
+    $('.alert').fadeOut('slow', function() {
+      $(this).remove();
+    });
+  }, 3000); // Adjust the time as needed
+});
+</script>

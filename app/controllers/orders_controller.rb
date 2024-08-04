@@ -4,6 +4,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
   before_action :ensure_cart_present, only: %i[new create]
+  after_action :send_confirmation_sms, only: %i[create]
 
   # Display the checkout form
   def new
@@ -17,6 +18,7 @@ class OrdersController < ApplicationController
     @order.user = current_user
     @order.total_price = calculate_total_price
     if @order.save
+      flash[:success] = 'Order was successfully created.'
       # Clear the cart after successful order creation
       session[:cart] = []
       redirect_to @order, notice: 'Order was successfully created.'
@@ -35,6 +37,18 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def send_confirmation_sms
+    TwilioSmsSender.new(
+      to: customer_phone_number,
+      body: "Your order ##{@order.id} has been placed successfully!"
+    ).call
+  end
+
+  def customer_phone_number
+    # Replace this with the actual way to get the customer's phone number
+    current_user.phone_number rescue '91-123456789' 
+  end
 
   # Ensure that there is at least one item in the cart
   def ensure_cart_present

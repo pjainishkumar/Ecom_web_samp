@@ -22,6 +22,7 @@ gem 'importmap-rails'
 
 # user managment
 gem 'devise'
+gem 'twilio-ruby'
 
 # style app
 gem 'bootstrap', '~> 5.1.0'
