@@ -22,7 +22,7 @@
             <td style="padding: 15px; border-bottom: 1px solid #dee2e6; text-align: center;">
               <%= form_with url: update_quantity_cart_path(item[:product].id), method: :patch, local: true do %>
                 <%= number_field_tag :quantity, item[:quantity], min: 1, style: "width: 60px; text-align: center; padding: 5px;" %>
-                <%= submit_tag 'Update', class: 'btn btn-primary', style: "margin-left: 10px; padding: 5px 10px; font-size: 0.9rem;" %>
+                <%= submit_tag 'Update', class: 'btn btn-gradient ', style: "margin-left: 10px; padding: 5px 10px; font-size: 0.9rem;" %>
               <% end %>
             </td>
             <td style="padding: 15px; border-bottom: 1px solid #dee2e6; text-align: right;"><%= number_to_currency(item[:product].price) %></td>
@@ -44,14 +44,12 @@
       </tfoot>
     </table>
 
-    <!-- Checkout button -->
-    <div class="text-center" style="margin-top: 20px;">
-      <%= link_to 'Proceed to Checkout', new_order_path, class: 'btn btn-success', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #28a745; border: none;" %>
+    <div class="card-footer text-center" style="display: grid;">
+      <%= link_to 'Proceed to Checkout', new_order_path, class: 'btn btn-gradient m-2'%>
+   <% end %>
+      <%= link_to 'Back to Products Page', root_path, method: :post, class: 'btn-sm btn-success btn-action m-2' %>
     </div>
-  <% end %>
-
-  <!-- Link to Products Page -->
-  <div class="text-center" style="margin-top: 20px;">
-    <%= link_to 'Back to Products Page', root_path, class: 'btn btn-secondary', style: "padding: 12px 20px; font-size: 1.2rem; border-radius: 5px; color: #ffffff; text-decoration: none; background-color: #6c757d; border: none;" %>
-  </div>
 </div>
+
+
+            
