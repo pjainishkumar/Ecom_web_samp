@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Product do
   # Permit the image parameter along with other attributes
   permit_params :name, :description, :price, :category, :on_sale, :new, :image
@@ -13,9 +15,9 @@ ActiveAdmin.register Product do
     column :new
     column :image do |product|
       if product.image.attached?
-        image_tag product.image, size: "100x100" # Adjust size as needed
+        image_tag product.image, size: '100x100' # Adjust size as needed
       else
-        "No image"
+        'No image'
       end
     end
     actions
@@ -52,9 +54,9 @@ ActiveAdmin.register Product do
       row :new
       row :image do |product|
         if product.image.attached?
-          image_tag product.image, size: "200x200" # Adjust size as needed
+          image_tag product.image, size: '200x200' # Adjust size as needed
         else
-          "No image"
+          'No image'
         end
       end
     end

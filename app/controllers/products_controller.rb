@@ -1,16 +1,14 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
-  
- def index
+  before_action :set_product, only: %i[show edit update destroy]
+
+  def index
     @products = Product.all
 
-    if params[:search].present?
-      @products = @products.where("name LIKE ?", "%#{params[:search]}%")
-    end
+    @products = @products.where('name LIKE ?', "%#{params[:search]}%") if params[:search].present?
 
-    if params[:category].present?
-      @products = @products.where(category: params[:category])
-    end
+    @products = @products.where(category: params[:category]) if params[:category].present?
 
     if params[:filter].present?
       case params[:filter]
@@ -26,7 +24,6 @@ class ProductsController < ApplicationController
     @products = @products.page(params[:page]).per(10)
   end
 
-  
   def new
     @product = Product.new
   end
@@ -40,8 +37,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
@@ -50,12 +46,13 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
-  
+
   def show
     @product = Product.find(params[:id])
   end
-  
+
   private
+
   def set_product
     @product = Product.find(params[:id])
   end

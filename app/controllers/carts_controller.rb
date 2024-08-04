@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/controllers/carts_controller.rb
 class CartsController < ApplicationController
   before_action :initialize_cart
@@ -6,7 +8,7 @@ class CartsController < ApplicationController
     @cart = session[:cart]
     @cart_items = @cart.map do |product_id, quantity|
       product = Product.find(product_id)
-      { product: product, quantity: quantity }
+      { product:, quantity: }
     end
   end
 
@@ -27,7 +29,7 @@ class CartsController < ApplicationController
   def update_quantity
     product_id = params[:product_id].to_s
     quantity = params[:quantity].to_i
-    if quantity > 0
+    if quantity.positive?
       session[:cart][product_id] = quantity
     else
       session[:cart].delete(product_id)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   get 'site_contents/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -19,9 +21,9 @@ Rails.application.routes.draw do
     get 'remove_from_cart/:product_id', to: 'carts#remove_from_cart', as: 'remove_from_cart'
     patch 'update_quantity/:product_id', to: 'carts#update_quantity', as: 'update_quantity'
   end
-  resource :checkout, only: [:new, :create] do
+  resource :checkout, only: %i[new create] do
     get 'success'
   end
-  resources :orders, only: [:new, :create, :show, :index]
+  resources :orders, only: %i[new create show index]
   get 'site_contents', to: 'site_contents#show', as: 'site_contents'
 end

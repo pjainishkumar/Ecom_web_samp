@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
-class Users::RegistrationDecoratorTest < Draper::TestCase
+module Users
+  class RegistrationDecoratorTest < Draper::TestCase
+  end
 end

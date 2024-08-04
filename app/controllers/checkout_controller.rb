@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # app/controllers/checkout_controller.rb
 class CheckoutController < ApplicationController
   before_action :authenticate_user!
@@ -7,7 +9,7 @@ class CheckoutController < ApplicationController
     @cart = session[:cart]
     @cart_items = @cart.map do |product_id, quantity|
       product = Product.find(product_id)
-      { product: product, quantity: quantity }
+      { product:, quantity: }
     end
   end
 
@@ -27,8 +29,7 @@ class CheckoutController < ApplicationController
     render :new
   end
 
-  def success
-  end
+  def success; end
 
   private
 

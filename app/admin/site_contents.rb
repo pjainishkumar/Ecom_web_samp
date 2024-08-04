@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register SiteContent do
   permit_params :about_us, :contact_us, :career, :general
 

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 # app/controllers/orders_controller.rb
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :ensure_cart_present, only: [:new, :create]
+  before_action :authenticate_user!, only: %i[new create]
+  before_action :ensure_cart_present, only: %i[new create]
 
   # Display the checkout form
   def new
@@ -30,15 +32,15 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all
-  end 
+  end
 
   private
 
   # Ensure that there is at least one item in the cart
   def ensure_cart_present
-    if session[:cart].blank?
-      redirect_to carts_path, alert: 'Your cart is empty. Please add items to your cart before checking out.'
-    end
+    return unless session[:cart].blank?
+
+    redirect_to carts_path, alert: 'Your cart is empty. Please add items to your cart before checking out.'
   end
 
   def order_params
@@ -53,5 +55,4 @@ class OrdersController < ApplicationController
     end
     cart_items.sum
   end
-
 end
